@@ -8,21 +8,34 @@
 
 
 ## Disclaimer
-**WIP**
+**Work-in-progress**
 
-We are trying to address issues on the official Akamai CLI Docker image.
+We are trying to address various issues of the official Akamai CLI Docker image.
 Changes implemented here may/will be opinionated, and may not be a good fit for everybody.
 
 At this point in time, we don't commit on any stability / backward compatibility, so use it at your own risk.
 
 
 
-## Using image
-Our image is based on Akamai CLI 1.1.5, and contains all modules listed in the *packages.json* file. 
+## Using our image
+Our image is based on Akamai CLI 1.1.5, and contains all the following modules, listed in the *packages.json* file :
+- adaptive-acceleration
+- appsec
+- auth
+- cps
+- edgeworkers
+- dns
+- firewall
+- image-manager
+- netstorage
+- property
+- property-manager
+- purge
+- visitor-prioritization
 
 ### Prerequisites
 You must use a personal access token with the appropriate scopes to install packages from Github Packages.
-Considering that your token is stored within ~/gh_token,
+Considering that your token is stored within ~/gh_token :
 
 ```
 $ docker login docker.pkg.github.com -u <username> --password-stdin < ~/gh_token
@@ -34,4 +47,9 @@ $ docker pull docker.pkg.github.com/ducksify/docker-akamai-cli/latest
 ```
 
 ### Usage
-tbd
+TBD
+
+
+## Customizing build
+
+TBD
