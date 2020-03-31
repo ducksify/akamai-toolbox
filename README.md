@@ -6,6 +6,13 @@
 [![GitHub forks](https://img.shields.io/github/forks/ducksify/docker-akamai-cli?style=flat-square)](https://github.com/ducksify/docker-akamai-cli/network)
 [![GitHub stars](https://img.shields.io/github/stars/ducksify/docker-akamai-cli?style=flat-square)](https://github.com/ducksify/docker-akamai-cli/stargazers)
 
+## Table of Contents
+- [Disclaimer](#disclaimer)
+- [Using our image](#using-our-image)
+  + [Prerequisites](#prerequisites)
+  + [Pulling image](#pulling-image)
+  + [Usage](#usage)
+- [Customizing build](#customizing-build)
 
 ## Disclaimer
 **Work-in-progress**
