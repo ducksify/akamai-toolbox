@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# Akamai Toolbox Wrapper
+#
+CLI_IMAGE_NAME="docker.pkg.github.com/ducksify/docker-akamai-toolbox/latest"
+AKAMAI_TOOLBOX_WORKSPACE="${AKAMAI_TOOLBOX_WORKSPACE:-${HOME}/akamai-toolbox-workspace}"
+
+[ -d "${AKAMAI_TOOLBOX_WORKSPACE}" ] || {
+  mkdir -p "${AKAMAI_TOOLBOX_WORKSPACE}"
+}
+
+if [[ `docker ps | grep akamai-toolbox$ | wc -l` -eq 1 ]]; then
+  docker exec -it \
+    akamai-toolbox \
+    akamai $@
+elif docker start akamai-toolbox > /dev/null 2>&1 && sleep 3 && docker exec -it akamai-toolbox akamai $@; then
+  exit 0
+else
+  docker create -it \
+    -v $HOME/.edgerc:/home/akamaiuser/.edgerc \
+    -v ${AKAMAI_TOOLBOX_WORKSPACE}:/home/akamaiuser/workspace \
+    --cap-drop=all \
+    --name akamai-toolbox ${CLI_IMAGE_NAME} > /dev/null
+    akamai-toolbox $@
+fi
