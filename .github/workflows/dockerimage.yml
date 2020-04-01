@@ -5,6 +5,7 @@ on:
     paths-ignore: 
       - 'README.md'
       - 'LICENSE'
+      - '.github/ISSUE_TEMPLATE/*'
     branches: [ master ]
 
 jobs:
