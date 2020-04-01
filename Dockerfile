@@ -13,7 +13,9 @@ RUN mkdir -p /cli/.akamai-cli \
     && pip3 install --no-cache-dir --upgrade pip \
     && curl -sL -o /usr/local/bin/akamai $(curl -s "https://api.github.com/repos/akamai/cli/releases/tags/$AKAMAI_CLI_VERSION" | jq -r '.assets[].browser_download_url' | grep linuxamd64 | grep -v sig) \
     && chmod +x /usr/local/bin/akamai \
-    && curl -s "$AKAMAI_CLI_PACKAGES" | jq -r '.packages[].name' | xargs /usr/local/bin/akamai install --force
+    && curl -s "$AKAMAI_CLI_PACKAGES" | jq -r '.packages[].name' | xargs /usr/local/bin/akamai install --force \
+    && apt-get remove --purge python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip npm \
+    && apt-get clean
 
 RUN echo "[cli]" > /cli/.akamai-cli/config && \
     echo "cache-path            = /cli/.akamai-cli/cache" >> /cli/.akamai-cli/config && \
