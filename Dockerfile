@@ -6,8 +6,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV GOROOT="/usr/lib/go" GOPATH="/gopath" GOBIN="/gopath/bin" AKAMAI_USER="akamaiuser" AKAMAI_USER_HOME="/home/akamaiuser" AKAMAI_CLI_HOME="/home/akamaiuser/cli" AKAMAI_CLI_PACKAGES="$AKAMAI_CLI_PACKAGES" AKAMAI_CLI_VERSION="$AKAMAI_CLI_VERSION"
 
 RUN useradd -m -d ${AKAMAI_USER_HOME} -s /bin/sh ${AKAMAI_USER} \
-    && mkdir -p ${AKAMAI_CLI_HOME} ${AKAMAI_USER_HOME}/workspace \
-    && chown -R ${AKAMAI_USER}:${AKAMAI_USER} ${AKAMAI_CLI_HOME}/.akamai-cli ${AKAMAI_USER_HOME}/workspace \
+    && mkdir -p ${AKAMAI_CLI_HOME}/.akamai-cli ${AKAMAI_USER_HOME}/workspace \
+    && chown -R ${AKAMAI_USER}:${AKAMAI_USER} ${AKAMAI_CLI_HOME} ${AKAMAI_USER_HOME}/workspace \
     && apt-get update \
     && apt-get -y dist-upgrade \
     && apt-get install --no-install-recommends -y git python2 python3 python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip openssl nodejs npm golang jq curl \
