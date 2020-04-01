@@ -1,6 +1,6 @@
 FROM debian:10-slim
 ARG AKAMAI_CLI_VERSION="1.1.5"
-ARG AKAMAI_CLI_PACKAGES="https://raw.githubusercontent.com/ducksify/docker-akamai-cli/master/packages.json"
+ARG AKAMAI_CLI_PACKAGES="https://raw.githubusercontent.com/ducksify/docker-akamai-toolbox/master/packages.json"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV GOROOT="/usr/lib/go" GOPATH="/gopath" GOBIN="/gopath/bin" AKAMAI_USER="akamaiuser" AKAMAI_USER_HOME="/home/akamaiuser" AKAMAI_CLI_HOME="/home/akamaiuser/cli" AKAMAI_CLI_PACKAGES="$AKAMAI_CLI_PACKAGES" AKAMAI_CLI_VERSION="$AKAMAI_CLI_VERSION"
