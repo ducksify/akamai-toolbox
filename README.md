@@ -32,6 +32,7 @@ Our image is based on Akamai CLI 1.1.5, and contains all the following modules, 
 - cps
 - edgeworkers
 - dns
+- eaa
 - firewall
 - image-manager
 - netstorage
@@ -42,7 +43,7 @@ Our image is based on Akamai CLI 1.1.5, and contains all the following modules, 
 
 ### Prerequisites
 You must use a personal access token with the appropriate scopes to install packages from Github Packages.
-Considering that your token is stored within ~/gh_token :
+Considering that your token is stored within `~/gh_token` :
 
 ```
 $ docker login docker.pkg.github.com -u <username> --password-stdin < ~/gh_token

@@ -269,6 +269,23 @@
       "requirements": {
         "python": "3.0.0"
       }
+    },
+    {
+      "title": "Enterprise Application Access",
+      "name": "eaa",
+      "version": "v0.1.2",
+      "url": "https://github.com/akamai/cli-eaa",
+      "issues": "https://github.com/akamai/cli-visitor-eaa/issues",
+      "requirements": {
+        "python": "2.7.6"
+      },
+      "commands": [
+        {
+          "name": "eaa",
+          "version": "0.1.2",
+          "description": "Akamai CLI for Enterprise Application Access (EAA)"
+        }
+      ]
     }
   ]
 }
