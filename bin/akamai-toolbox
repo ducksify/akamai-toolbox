@@ -12,13 +12,13 @@ AKAMAI_TOOLBOX_WORKSPACE="${AKAMAI_TOOLBOX_WORKSPACE:-${HOME}/akamai-toolbox-wor
 if [[ `docker ps | grep akamai-toolbox$ | wc -l` -eq 1 ]]; then
   docker exec -it \
     akamai-toolbox \
-    akamai $@
-elif docker start akamai-toolbox > /dev/null 2>&1 && sleep 3 && docker exec -it akamai-toolbox akamai $@; then
+    cli $@
+elif docker start akamai-toolbox > /dev/null 2>&1 && sleep 3 && docker exec -it akamai-toolbox cli $@; then
   exit 0
 else
   docker create -it \
-    -v $HOME/.edgerc:/home/akamaiuser/.edgerc \
-    -v ${AKAMAI_TOOLBOX_WORKSPACE}:/home/akamaiuser/workspace \
+    -v $HOME/.edgerc:/home/toolbox/.edgerc \
+    -v ${AKAMAI_TOOLBOX_WORKSPACE}:/home/toolbox/workspace \
     --cap-drop=all \
     --name akamai-toolbox ${CLI_IMAGE_NAME} > /dev/null
     akamai-toolbox $@
