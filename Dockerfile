@@ -12,9 +12,10 @@ RUN useradd -m -d ${TOOLBOX_USER_HOME} -s /bin/sh ${TOOLBOX_USER} \
     && echo "prefix = /home/toolbox/.npm-packages" >> ${TOOLBOX_USER_HOME}/.npmrc \
     && apt-get update \
     && apt-get -y dist-upgrade \
-    && apt-get install --no-install-recommends -y git python2 python3 python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip openssl nodejs npm golang jq curl \
+    && apt-get install --no-install-recommends -y git python2 python3 python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip openssl nodejs npm golang jq curl httpie \
     && pip2 install --no-cache-dir --upgrade pip \
     && pip3 install --no-cache-dir --upgrade pip \
+    && pip3 install httpie-edgegrid \
     && curl -sL -o /usr/local/bin/cli $(curl -s "https://api.github.com/repos/akamai/cli/releases/tags/$AKAMAI_CLI_VERSION" | jq -r '.assets[].browser_download_url' | grep linuxamd64 | grep -v sig) \
     && chmod +x /usr/local/bin/cli \
     && curl -s "$AKAMAI_CLI_PACKAGES" | jq -r '.packages[]' | xargs -I '{}' /bin/su -c "export AKAMAI_CLI_HOME=${AKAMAI_CLI_HOME} ; /usr/local/bin/cli install --force {} ; echo OK" - ${TOOLBOX_USER} \
