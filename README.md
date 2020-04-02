@@ -15,7 +15,7 @@
 
 ## Table of Contents
 - [Disclaimer](#disclaimer)
-- [Using our image](#using-our-image)
+- [Using the toolbox](#using-the-toolbox)
   + [Prerequisites](#prerequisites)
   + [Pulling image](#pulling-image)
   + [Usage](#usage)
@@ -24,46 +24,109 @@
 ## Disclaimer
 **Work-in-progress**
 
-We are trying to address various issues of the official Akamai CLI Docker image and make it easier to build a full featured CLI toolbox to interact with Akamai OpenAPIs.
-Changes implemented here may/will be opinionated, and may not be a good fit for everybody.
+This project is trying to address various issues of the official Akamai CLI Docker image, and provide a full featured toolbox to interact with Akamai OpenAPIs & debug online properties.
+
+Changes implemented here will be opinionated, and may not be a good fit for everybody.
+
+Main drifts with Akamai official Docker image :
+- Built on top of Debian slim (solve all potential musl/glibc differences)
+- Unprivileged user
+- Lighter
+- Includes httpie + edgegrid.
+- 
 
 At this point in time, we don't commit on any stability / backward compatibility, so use it at your own risk.
 
 
+## Using the toolbox
 
-## Using our image
-Our image is based on Akamai CLI 1.1.5, and contains all the following modules, listed in the *packages.json* file :
-- adaptive-acceleration
-- appsec
-- auth
-- cps
-- edgeworkers
-- dns
-- eaa
-- firewall
-- image-manager
-- netstorage
-- property
-- property-manager
-- purge
-- visitor-prioritization
+The toolbox contains httpie + edgegrid plugin, akamai CLI 1.1.5 (https://github.com/akamai/cli), and the following modules (cf. `packages.json`) :
+
+| Module  	| Description  	|
+|---	|---	|
+| adaptive-acceleration  	| -  	|
+| appsec  	| -  	|
+| auth  	| -  	|
+| cps  	| -  	|
+| dns  	| -  	|
+| eaa  	| -  	|
+| edgeworkers  	| -  	|
+| firewall  	| -  	|
+| image-manager  	| -  	|
+| netstorage  	| -  	|
+| property  	| -  	|
+| property-manager  	| -  	|
+| purge  	| -  	|
+| visitor-prioritization  	| -  	|
+
+
+
+
+
 
 ### Prerequisites
 You must use a personal access token with the appropriate scopes to install packages from Github Packages.
 Considering that your token is stored within `~/gh_token` :
-
 ```
 $ docker login docker.pkg.github.com -u <username> --password-stdin < ~/gh_token
 ```
 
 ### Pulling image
+If you just want to pull the image :
 ```
 $ docker pull docker.pkg.github.com/ducksify/docker-akamai-toolbox/latest
 ```
 
 ### Usage
-TBD
 
+Simply deploy `bin/akamai-toolbox` in your $PATH & run it :
+```
+$ akamai-toolbox
+Usage :
+-------
+$ akamai-toolbox <cmd>
+
+Valid commands :
+----------------
+- cli : Akamai CLI
+- http : HTTPie with edgegrid plugin
+```
+
+#### Accessing the CLI
+```
+$ akamai-toolbox cli
+Usage:
+  akamai [global flags] command [command flags] [arguments...]
+
+Built-In Commands:
+  config
+  help
+  install (alias: get)
+  list
+  search
+  uninstall
+  update
+  upgrade
+
+Installed Commands:
+  adaptive-acceleration (alias: a2)
+  appsec
+  
+  [... truncated ...]
+```
+
+#### Using HTTPie 
+```
+$ akamai-toolbox http
+usage: http [--json] [--form] [--pretty {all,colors,format,none}]
+            [--style STYLE] [--print WHAT] [--headers] [--body] [--verbose]
+            [--all] [--history-print WHAT] [--stream] [--output FILE]
+            [--download] [--continue]
+            [--session SESSION_NAME_OR_PATH | --session-read-only SESSION_NAME_OR_PATH]
+            [--auth USER[:PASS]] [--auth-type {basic,digest,edgegrid}]
+
+  [... truncated ...]
+```
 
 ## Customizing build
 
