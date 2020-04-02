@@ -8,6 +8,8 @@ ENV TOOLBOX_USER="toolbox" TOOLBOX_USER_HOME="/home/toolbox" AKAMAI_CLI_HOME="/h
 RUN useradd -m -d ${TOOLBOX_USER_HOME} -s /bin/sh ${TOOLBOX_USER} \
     && mkdir -p ${AKAMAI_CLI_HOME}/.akamai-cli ${TOOLBOX_USER_HOME}/workspace \
     && chown -R ${TOOLBOX_USER}:${TOOLBOX_USER} ${AKAMAI_CLI_HOME} ${TOOLBOX_USER_HOME}/workspace \
+    && echo "global = true" > ${TOOLBOX_USER_HOME}/.npmrc \
+    && echo "prefix = /home/toolbox/.npm-packages" >> ${TOOLBOX_USER_HOME}/.npmrc \
     && apt-get update \
     && apt-get -y dist-upgrade \
     && apt-get install --no-install-recommends -y git python2 python3 python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip openssl nodejs npm golang jq curl \
