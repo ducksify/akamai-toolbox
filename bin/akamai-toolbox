@@ -18,6 +18,7 @@ then
   echo -e "----------------"
   echo -e "- cli : Akamai CLI"
   echo -e "- http : HTTPie with edgegrid plugin"
+  echo -e "- akcurl : Debug online properties"
   echo -e "\n"
   exit 123
 else

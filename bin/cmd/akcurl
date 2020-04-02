@@ -1,0 +1,130 @@
+#!/bin/bash
+#
+# akcurl
+# Perf templating heavily inspired by httpstat
+#
+
+URL=$1
+
+readonly head="/tmp/akcurl-header.$$$RANDOM$(date +%s)"
+readonly green="\033[32m"
+readonly blue="\033[36m"
+readonly white="\033[37m"
+readonly reset="\033[0m"
+readonly curl_format='{
+"time_namelookup": %{time_namelookup},
+"time_connect": %{time_connect},
+"time_appconnect": %{time_appconnect},
+"time_pretransfer": %{time_pretransfer},
+"time_redirect": %{time_redirect},
+"time_starttransfer": %{time_starttransfer},
+"time_total": %{time_total},
+"speed_download": %{speed_download},
+"speed_upload": %{speed_upload}
+}'
+
+fmta() {
+    echo $1 | awk '{printf("%5dms\n", $1 + 0.5)}'
+}
+
+fmtb() {
+    local d
+    d="$(
+    echo $1 | awk '{printf("%d\n", $1 + 0.5)}'
+    )"
+    printf "%-7s\n" "${d}ms"
+}
+
+get() {
+    local d
+    d="$(
+    echo "$data" \
+        | grep "$1" \
+        | awk '{print $2}' \
+        | sed 's/,//g'
+    )"
+    echo "$d"*1000 | bc -l
+}
+
+calc() {
+    echo "$@" | bc -l
+}
+
+data="$(
+LC_ALL=C curl \
+    -w "${curl_format}" \
+    -H "User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 - Ducksified Akamai Toolbox. akcurl" \
+    -H "Pragma: akamai-x-get-cache-tags,akamai-x-cache-on, akamai-x-cache-remote-on, akamai-x-check-cacheable, akamai-x-get-cache-key, akamai-x-get-true-cache-key, akamai-x-ro-trace, x-akamai-cpi-trace" \
+    -H "Accept-Encoding: gzip,defalte,br" \
+    -H "x-akamai-ro-piez: on" \
+    -H "x-akamai-rua-debug: on" \
+    -H "x-im-piez: on" \
+    -H "Accept-Encoding: gzip,defalte,br" \
+    -D "${head}" \
+    -s -S -k \
+    "${URL}" 2>&1
+)"
+
+readonly time_namelookup="$(get time_namelookup)"
+readonly time_connect="$(get time_connect)"
+readonly time_appconnect="$(get time_appconnect)"
+readonly time_pretransfer="$(get time_pretransfer)"
+readonly time_redirect="$(get time_redirect)"
+readonly time_starttransfer="$(get time_starttransfer)"
+readonly time_total="$(get time_total)"
+readonly speed_download="$(get speed_download)"
+readonly speed_upload="$(get speed_upload)"
+readonly range_dns="$time_namelookup"
+readonly range_connection="$(calc $time_connect - $time_namelookup)"
+readonly range_ssl="$(calc $time_pretransfer - $time_connect)"
+readonly range_server="$(calc $time_starttransfer - $time_pretransfer)"
+readonly range_transfer="$(calc $time_total - $time_starttransfer)"
+
+readonly a000="$blue$(fmta $range_dns)$reset"
+readonly a001="$blue$(fmta $range_connection)$reset"
+readonly a002="$blue$(fmta $range_ssl)$reset"
+readonly a003="$blue$(fmta $range_server)$reset"
+readonly a004="$blue$(fmta $range_transfer)$reset"
+readonly b000="$blue$(fmtb $time_namelookup)$reset"
+readonly b001="$blue$(fmtb $time_connect)$reset"
+readonly b002="$blue$(fmtb $time_pretransfer)$reset"
+readonly b003="$blue$(fmtb $time_starttransfer)$reset"
+readonly b004="$blue$(fmtb $time_total)$reset"
+
+readonly http_template="$white
+  DNS Lookup   TCP Connection   Server Processing   Content Transfer$reset
+[   ${a000}  |     ${a001}    |      ${a003}      |      ${a004}     ]
+             |                |                   |                  |
+    namelookup:${b000}        |                   |                  |
+                        connect:${b001}           |                  |
+                                      starttransfer:${b003}          |
+                                                                 total:${b004}
+"
+
+readonly https_template="$white
+  DNS Lookup   TCP Connection   SSL Handshake   Server Processing   Content Transfer$reset
+[   ${a000}  |     ${a001}    |    ${a002}    |      ${a003}      |      ${a004}     ]
+             |                |               |                   |                  |
+    namelookup:${b000}        |               |                   |                  |
+                        connect:${b001}       |                   |                  |
+                                    pretransfer:${b002}           |                  |
+                                                      starttransfer:${b003}          |
+                                                                                 total:${b004}
+"
+
+
+
+head -1 $head | perl -pe 's/^(.*)$/'$green'$1'$reset'/g'
+tail -n +2 "$head" | sort | perl -pe 's/^(.*?): (.*)$/'$white'$1: '$blue'$2/g'
+printf "$reset"
+printf "\nDownload speed: $blue%.1f KB$reset\nUpload speed $blue%.1f KB$reset\n\n" \
+        "$(calc $speed_download / 1024)" \
+        "$(calc $speed_upload / 1024)"
+
+if [[ $URL =~ https:// ]]; then
+    printf "$https_template\n"
+else
+    printf "$http_template\n"
+fi
+
+rm -f $head
