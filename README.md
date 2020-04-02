@@ -1,10 +1,15 @@
-# Ducksified Akamai Toolbox
-[![GitHub license](https://img.shields.io/github/license/ducksify/docker-akamai-toolbox?style=flat-square)](https://github.com/ducksify/docker-akamai-toolbox/blob/master/LICENSE)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ducksify/docker-akamai-toolbox/Docker?style=flat-square)
-![GitHub issues](https://img.shields.io/github/issues-raw/ducksify/docker-akamai-toolbox?style=flat-square)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/ducksify/docker-akamai-toolbox?style=flat-square)
-[![GitHub forks](https://img.shields.io/github/forks/ducksify/docker-akamai-toolbox?style=flat-square)](https://github.com/ducksify/docker-akamai-toolbox/network)
-[![GitHub stars](https://img.shields.io/github/stars/ducksify/docker-akamai-toolbox?style=flat-square)](https://github.com/ducksify/docker-akamai-toolbox/stargazers)
+<p align="center">
+  <img alt="Ducksify logo" src="https://github.com/ducksify/docker-akamai-toolbox/raw/master/docs/assets/logo.jpg"/>
+  <h2 align="center">Ducksified Akamai Toolbox</h3>
+  <p align="center">
+    <img alt="GitHub" src="https://img.shields.io/github/license/ducksify/docker-akamai-toolbox?style=flat-square"/>
+    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/ducksify/docker-akamai-toolbox/Docker?style=flat-square"/>
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/ducksify/docker-akamai-toolbox?style=flat-square"/>
+    <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr-raw/ducksify/docker-akamai-toolbox?style=flat-square"/>
+    <img alt="GitHub forks" src="https://img.shields.io/github/forks/ducksify/docker-akamai-toolbox?style=flat-square"/>
+    <img alt="GitHub stars" src="https://img.shields.io/github/stars/ducksify/docker-akamai-toolbox?style=flat-square"/>
+  </p>
+</p>
 
 ## Table of Contents
 - [Disclaimer](#disclaimer)
