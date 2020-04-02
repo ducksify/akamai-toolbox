@@ -9,17 +9,29 @@ AKAMAI_TOOLBOX_WORKSPACE="${AKAMAI_TOOLBOX_WORKSPACE:-${HOME}/akamai-toolbox-wor
   mkdir -p "${AKAMAI_TOOLBOX_WORKSPACE}"
 }
 
-if [[ `docker ps | grep akamai-toolbox$ | wc -l` -eq 1 ]]; then
-  docker exec -it \
-    akamai-toolbox \
-    cli $@
-elif docker start akamai-toolbox > /dev/null 2>&1 && sleep 3 && docker exec -it akamai-toolbox cli $@; then
-  exit 0
+if [[ ! "$1" =~ ^(cli|http|akcurl)$ ]];
+then
+  echo -e "Usage :"
+  echo -e "-------"
+  echo -e "$ akamai-toolbox <cmd>\n"
+  echo -e "Valid commands :"
+  echo -e "----------------"
+  echo -e "- cli : Akamai CLI"
+  echo -e "- http : HTTPie with edgegrid plugin"
+  echo -e "\n"
+  exit 123
 else
-  docker create -it \
-    -v $HOME/.edgerc:/home/toolbox/.edgerc \
-    -v ${AKAMAI_TOOLBOX_WORKSPACE}:/home/toolbox/workspace \
-    --cap-drop=all \
-    --name akamai-toolbox ${CLI_IMAGE_NAME} > /dev/null
-    akamai-toolbox $@
+  if [[ `docker ps | grep akamai-toolbox$ | wc -l` -eq 1 ]]; then
+    docker exec -it \
+      akamai-toolbox $@
+  elif docker start akamai-toolbox > /dev/null 2>&1 && sleep 3 && docker exec -it akamai-toolbox $@; then
+    exit 0
+  else
+    docker create -it \
+      -v $HOME/.edgerc:/home/toolbox/.edgerc \
+      -v ${AKAMAI_TOOLBOX_WORKSPACE}:/home/toolbox/workspace \
+      --cap-drop=all \
+      --name akamai-toolbox ${CLI_IMAGE_NAME} > /dev/null
+      akamai-toolbox $@
+  fi
 fi
