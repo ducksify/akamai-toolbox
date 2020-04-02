@@ -1,6 +1,6 @@
 <p align="center">
   <img alt="Ducksify logo" src="https://github.com/ducksify/docker-akamai-toolbox/raw/master/docs/assets/logo.jpg"/>
-  <h2 align="center">Ducksified Akamai Toolbox</h3>
+  <h3 align="center">Ducksified Akamai Toolbox</h3>
   <p align="center">
     <img alt="GitHub" src="https://img.shields.io/github/license/ducksify/docker-akamai-toolbox?style=flat-square"/>
     <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/ducksify/docker-akamai-toolbox/Docker?style=flat-square"/>
@@ -10,6 +10,8 @@
     <img alt="GitHub stars" src="https://img.shields.io/github/stars/ducksify/docker-akamai-toolbox?style=flat-square"/>
   </p>
 </p>
+
+
 
 ## Table of Contents
 - [Disclaimer](#disclaimer)
