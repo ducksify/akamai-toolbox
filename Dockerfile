@@ -36,7 +36,7 @@ RUN useradd -m -d ${TOOLBOX_USER_HOME} -s /bin/sh ${TOOLBOX_USER} \
     && su -c "npm cache clean --force" - ${TOOLBOX_USER} \
     && apt-get remove -y --purge python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip npm "golang*" git \
     && apt-get clean \
-    && find /home/toolbox/.akamai-cli/src/ -type d -name ".git" | xargs -I rm -rf '{}' \
+    && find /home/toolbox/.akamai-cli/src/ -type d -name ".git" | xargs -I '{}' rm -rf '{}' \
     && echo "[cli]"                                                        >  ${AKAMAI_CLI_HOME}/.akamai-cli/config \
     && echo "cache-path            = ${AKAMAI_CLI_HOME}/.akamai-cli/cache" >> ${AKAMAI_CLI_HOME}/.akamai-cli/config \
     && echo "config-version        = 1.1"                                  >> ${AKAMAI_CLI_HOME}/.akamai-cli/config \
