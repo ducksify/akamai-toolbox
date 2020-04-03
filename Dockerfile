@@ -25,7 +25,7 @@ RUN useradd -m -d ${TOOLBOX_USER_HOME} -s /bin/sh ${TOOLBOX_USER} \
     && echo "prefix = /home/toolbox/.npm-packages" >> ${TOOLBOX_USER_HOME}/.npmrc \
     && apt-get update \
     && apt-get -y dist-upgrade \
-    && apt-get install --no-install-recommends -y git python2 python3 python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip openssl nodejs npm golang jq curl httpie \
+    && apt-get install --no-install-recommends -y git python2 python3 python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip openssl nodejs npm golang jq curl httpie bc \
     && pip2 install --no-cache-dir --upgrade pip \
     && pip3 install --no-cache-dir --upgrade pip \
     && pip3 install httpie-edgegrid \
