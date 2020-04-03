@@ -2,12 +2,12 @@
   <img alt="Ducksify logo" src="https://github.com/ducksify/akamai-toolbox/raw/master/docs/assets/logo.jpg"/>
   <h3 align="center">Ducksified Akamai Toolbox</h3>
   <p align="center">
-    <img alt="GitHub" src="https://img.shields.io/github/license/ducksify/akamai-toolbox?style=flat-square"/>
-    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/ducksify/akamai-toolbox/Docker?style=flat-square"/>
-    <img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/ducksify/akamai-toolbox?style=flat-square"/>
-    <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr-raw/ducksify/akamai-toolbox?style=flat-square"/>
-    <img alt="GitHub forks" src="https://img.shields.io/github/forks/ducksify/akamai-toolbox?style=flat-square"/>
-    <img alt="GitHub stars" src="https://img.shields.io/github/stars/ducksify/akamai-toolbox?style=flat-square"/>
+    <img alt="GitHub License" src="https://badgen.net/github/license/ducksify/akamai-toolbox"/>
+    <img alt="GitHub Workflow Status" src="https://github.com/ducksify/akamai-toolbox/workflows/Docker/badge.svg"/>
+    <img alt="GitHub issues" src="https://badgen.net/github/open-issues/ducksify/akamai-toolbox"/>
+    <img alt="GitHub pull requests" src="https://badgen.net/github/open-prs/ducksify/akamai-toolbox"/>
+    <img alt="GitHub forks" src="https://badgen.net/github/forks/ducksify/akamai-toolbox"/>
+    <img alt="GitHub stars" src="https://badgen.net/github/stars/ducksify/akamai-toolbox"/>
   </p>
 </p>
 
