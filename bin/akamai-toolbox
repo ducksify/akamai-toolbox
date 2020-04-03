@@ -2,7 +2,7 @@
 #
 # Akamai Toolbox Wrapper
 #
-CLI_IMAGE_NAME="docker.pkg.github.com/ducksify/docker-akamai-toolbox/latest"
+CLI_IMAGE_NAME="ducksify/akamai-toolbox"
 AKAMAI_TOOLBOX_WORKSPACE="${AKAMAI_TOOLBOX_WORKSPACE:-${HOME}/akamai-toolbox-workspace}"
 
 [ -d "${AKAMAI_TOOLBOX_WORKSPACE}" ] || {
