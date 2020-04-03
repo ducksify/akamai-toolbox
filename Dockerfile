@@ -2,14 +2,14 @@ FROM debian:10-slim
 ARG BUILD_DATE
 ARG VCS_REF
 ARG AKAMAI_CLI_VERSION="1.1.5"
-ARG AKAMAI_CLI_PACKAGES="https://raw.githubusercontent.com/ducksify/docker-akamai-toolbox/master/packages.json"
+ARG AKAMAI_CLI_PACKAGES="https://raw.githubusercontent.com/ducksify/akamai-toolbox/master/packages.json"
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.name="Akamai Toolbox" \
       org.label-schema.description="Ducksified Akamai Toolbox" \
       org.label-schema.url="https://ducksify.com/" \
-      org.label-schema.vcs-url="https://github.com/ducksify/docker-akamai-toolbox" \
+      org.label-schema.vcs-url="https://github.com/ducksify/akamai-toolbox" \
       org.label-schema.vendor="Ducksify SA" \
       org.label-schema.schema-version="1.0"
 

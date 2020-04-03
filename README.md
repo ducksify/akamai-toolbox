@@ -1,13 +1,13 @@
 <p align="center">
-  <img alt="Ducksify logo" src="https://github.com/ducksify/docker-akamai-toolbox/raw/master/docs/assets/logo.jpg"/>
+  <img alt="Ducksify logo" src="https://github.com/ducksify/akamai-toolbox/raw/master/docs/assets/logo.jpg"/>
   <h3 align="center">Ducksified Akamai Toolbox</h3>
   <p align="center">
-    <img alt="GitHub" src="https://img.shields.io/github/license/ducksify/docker-akamai-toolbox?style=flat-square"/>
-    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/ducksify/docker-akamai-toolbox/Docker?style=flat-square"/>
-    <img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/ducksify/docker-akamai-toolbox?style=flat-square"/>
-    <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr-raw/ducksify/docker-akamai-toolbox?style=flat-square"/>
-    <img alt="GitHub forks" src="https://img.shields.io/github/forks/ducksify/docker-akamai-toolbox?style=flat-square"/>
-    <img alt="GitHub stars" src="https://img.shields.io/github/stars/ducksify/docker-akamai-toolbox?style=flat-square"/>
+    <img alt="GitHub" src="https://img.shields.io/github/license/ducksify/akamai-toolbox?style=flat-square"/>
+    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/ducksify/akamai-toolbox/Docker?style=flat-square"/>
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/ducksify/akamai-toolbox?style=flat-square"/>
+    <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr-raw/ducksify/akamai-toolbox?style=flat-square"/>
+    <img alt="GitHub forks" src="https://img.shields.io/github/forks/ducksify/akamai-toolbox?style=flat-square"/>
+    <img alt="GitHub stars" src="https://img.shields.io/github/stars/ducksify/akamai-toolbox?style=flat-square"/>
   </p>
 </p>
 
@@ -74,7 +74,7 @@ $ docker login docker.pkg.github.com -u <username> --password-stdin < ~/gh_token
 ### Pulling image
 If you just want to pull the image :
 ```
-$ docker pull docker.pkg.github.com/ducksify/docker-akamai-toolbox/latest
+$ docker pull docker.pkg.github.com/ducksify/akamai-toolbox/latest
 ```
 
 ### Usage
