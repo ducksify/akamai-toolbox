@@ -2,7 +2,7 @@ FROM debian:10-slim
 ARG BUILD_DATE
 ARG VCS_REF
 ARG AKAMAI_CLI_VERSION="1.1.5"
-ARG AKAMAI_CLI_PACKAGES="https://raw.githubusercontent.com/ducksify/akamai-toolbox/master/packages.json"
+ARG AKAMAI_CLI_PACKAGES="./packages.json"
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-ref=$VCS_REF \
