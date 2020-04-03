@@ -3,7 +3,6 @@
   <h3 align="center">Ducksified Akamai Toolbox</h3>
   <p align="center">
     <img alt="GitHub License" src="https://badgen.net/github/license/ducksify/akamai-toolbox"/>
-    <img alt="GitHub Workflow Status" src="https://github.com/ducksify/akamai-toolbox/workflows/Docker/badge.svg"/>
     <img alt="GitHub issues" src="https://badgen.net/github/open-issues/ducksify/akamai-toolbox"/>
     <img alt="GitHub pull requests" src="https://badgen.net/github/open-prs/ducksify/akamai-toolbox"/>
     <img alt="GitHub forks" src="https://badgen.net/github/forks/ducksify/akamai-toolbox"/>
