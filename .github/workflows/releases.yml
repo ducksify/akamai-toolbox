@@ -1,4 +1,4 @@
-me: Releases
+- name: Releases
 
 on:
   push:
