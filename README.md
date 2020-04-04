@@ -52,7 +52,7 @@ If you want to modify included modules, please see [Customizing build](#customiz
 - `${HOME}/.edgerc` file containing your credentials to connect to Akamai APIs
 
 ### Wrapper installation
-Head to the [releases page](https://github.com/ducksify/akamai-toolbox/releases), download the `akamai-toolbox` release, make it executable & somewhere in your PATH.
+Head to the [releases page](https://github.com/ducksify/akamai-toolbox/releases), download the `akamai-toolbox` release somewhere in your PATH & make it executable.
 
 Downloading the wrapper from the master branch is also definitely an option. Please note that in this case, your toolbox will use the `:latest` tag of the Docker image that may/will be updated without prior notice. 
 
