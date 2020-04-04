@@ -16,12 +16,13 @@
 
 ## Table of Contents
 - [Table of Contents](#table-of-contents)
-- [Disclaimer](#disclaimer)
+- [Intro](#intro)
   * [Project description](#project-description)
   * [Notes](#notes)
 - [Using the toolbox](#using-the-toolbox)
   * [Requirements](#requirements)
   * [Wrapper installation](#wrapper-installation)
+  * [Workspace Management](#workspace-management)
   * [Pulling image](#pulling-image)
   * [Handy shell aliases](#handy-shell-aliases)
   * [Usage](#usage)
@@ -30,10 +31,9 @@
     + [Using akcurl](#using-akcurl)
 - [Customizing build](#customizing-build)
 
-## Disclaimer
+## Intro
 
 ### Project description
-**Work-in-progress**
 
 This project is providing an opinionated, full featured and easily extensible/customizable toolbox to interact with Akamai OpenAPIs & debug online properties which includes :
 - Akamai CLI installed with various modules (official & contrib)
@@ -43,6 +43,7 @@ This project is providing an opinionated, full featured and easily extensible/cu
 Main drifts with the Akamai CLI official Docker image (non exhaustive):
 - Built on top of Debian slim instead of Alpine (solves all potential musl/glibc differences)
 - Running as unprivileged user, with proper HOME folder & directory structure.
+- Isolated workspace folder + associated volume for commands creating files.
 - Additional tools (httpie/edgedrid, akcurl ...)
 - Lighter :)
 
@@ -74,6 +75,13 @@ $ wget -qO /usr/local/bin/akamai-toolbox https://raw.githubusercontent.com/ducks
 
 $ chmod +x /usr/local/bin/akamai-toolbox
 ```
+
+### Workspace Management
+Some commands will create files/folders (ie: `cli pm`, `cli cps audit`...). To make them accessible to your host, a volume is automatically created/mounted by the wrapper.
+
+By default, a `~/akamai-toolbox-workspace/` folder will be created on your host for this purpose.
+
+You can override it by setting up an environment variable called `AKAMAI_TOOLBOX_WORKSPACE` with the path you want to use (if the path doesn't exist, it will be automatically created).
 
 ### Pulling image
 If you just want to pull the image :
