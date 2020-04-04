@@ -15,11 +15,19 @@
 
 
 ## Table of Contents
+- [Table of Contents](#table-of-contents)
 - [Disclaimer](#disclaimer)
+  * [Project description](#project-description)
+  * [Notes](#notes)
 - [Using the toolbox](#using-the-toolbox)
-  + [Prerequisites](#prerequisites)
-  + [Pulling image](#pulling-image)
-  + [Usage](#usage)
+  * [Requirements](#requirements)
+  * [Wrapper installation](#wrapper-installation)
+  * [Pulling image](#pulling-image)
+  * [Handy shell aliases](#handy-shell-aliases)
+  * [Usage](#usage)
+    + [Using the Akamai CLI](#using-the-akamai-cli)
+    + [Using HTTPie](#using-httpie)
+    + [Using akcurl](#using-akcurl)
 - [Customizing build](#customizing-build)
 
 ## Disclaimer
@@ -74,7 +82,7 @@ $ docker pull ducksify/akamai-toolbox:<tagname>
 ```
 
 ### Handy shell aliases
-If you want to reduce the pressure on your keyboard, you can add the following aliases in your shell
+If you want to reduce the pressure on your keyboard, you can add the following aliases in your shell :
 ```
 alias akcurl="/usr/local/bin/akamai-toolbox akcurl"
 alias akhttp="/usr/local/bin/akamai-toolbox http --auth-type=edgegrid"
