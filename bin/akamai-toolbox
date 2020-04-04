@@ -2,7 +2,8 @@
 #
 # Akamai Toolbox Wrapper
 #
-CLI_IMAGE_NAME="ducksify/akamai-toolbox"
+TAG="latest"
+CLI_IMAGE_NAME="ducksify/akamai-toolbox:${TAG}"
 AKAMAI_TOOLBOX_WORKSPACE="${AKAMAI_TOOLBOX_WORKSPACE:-${HOME}/akamai-toolbox-workspace}"
 
 [ -d "${AKAMAI_TOOLBOX_WORKSPACE}" ] || {
