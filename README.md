@@ -143,11 +143,51 @@ content-encoding: gzip
 content-length: 5370
 content-type: text/html
 date: Sat, 04 Apr 2020 10:04:17 GMT
+etag: "3bb998476d9a9927c55d114e591164f6:1578732245.29281"
+expires: Sat, 04 Apr 2020 10:34:17 GMT
+last-modified: Sat, 11 Jan 2020 08:44:05 GMT
+server-timing: cdn-cache; desc=HIT
+server-timing: edge; dur=1
+strict-transport-security: max-age=31536000 ; includeSubDomains ; preload
+vary: Accept-Encoding
+x-akamai-transformed: 9 - 0 pmb=mRUM,3
+x-cache-key-extended-internal-use-only: S/=/38607/918457/redacted/redacted/redacted/?akamai-transform=9 vcd=16634
+x-cache-key: S/=/38607/918457/redacted/redacted/redacted/?akamai-transform=9
+x-cache: TCP_HIT from a23-10-249-53.deploy.akamaitechnologies.com (AkamaiGHost/9.9.4.1-29027442) (-)
+x-check-cacheable: NO
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-true-cache-key: /=/redacted/redacted/ vcd=16634
+x-xss-protection: 1; mode=block
 
-  [... truncated ...]
+Download speed: 23306.6 KB
+Upload speed 0.0 KB
+
+
+  DNS Lookup   TCP Connection   SSL Handshake   Server Processing   Content Transfer
+[      54ms  |        20ms    |       77ms    |         69ms      |          6ms     ]
+             |                |               |                   |                  |
+    namelookup:54ms           |               |                   |                  |
+                        connect:74ms          |                   |                  |
+                                    pretransfer:151ms             |                  |
+                                                      starttransfer:220ms            |
+                                                                                 total:226ms
 ```
 
 
 ## Customizing build
 
-TBD
+CLI modules included in the image are listed in `packages.json` which is parsed at build time.
+Should you want to create your own image, including only specific modules, just fork/clone the repository, update the `packages.json` file and rebuild the image :
+```
+$ cd /path/to/your/local/copy
+$ docker build -t akamai-toolbox .
+```
+
+It's also possible to specify a custom (or even HTTP remotely accessible) JSON file using `--build-arg` :
+```
+$ cd /path/to/your/local/copy
+$ docker build -t akamai-toolbox --build-arg AKAMAI_CLI_PACKAGES=your_custom_packages.json .
+```
+
+Please refer to the current `packages.json` file to get the correct JSON structure.
