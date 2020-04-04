@@ -1,0 +1,40 @@
+name: Releases
+
+on:
+  push:
+    tags:
+    - '*'
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: Build wrapper
+        run: |
+          _TAG=$(echo "${{ github.ref }}" | sed "s|refs/tags/||g")
+          sed -i "s|^TAG=\"latest\"|TAG=\"${_TAG}\"|" bin/akamai-toolbox
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            FIXME: improve release doc
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/akamai-toolbox
+          asset_name: akamai-toolbox
+          asset_content_type: text/plain
