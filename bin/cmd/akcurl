@@ -62,7 +62,7 @@ LC_ALL=C curl \
     -H "Accept-Encoding: gzip,defalte,br" \
     -D "${head}" \
     -s -S -k \
-    "${URL}" 2>&1
+    "${URL}" 2>&1 | tr -d '\0'
 )"
 
 readonly time_namelookup="$(get time_namelookup)"
