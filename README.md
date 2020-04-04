@@ -33,7 +33,7 @@ This project is providing an opinionated, full featured and easily extensible/cu
 - akcurl, a custom wrapper around curl injecting Akamai debug pragmas and providing performance stats.
 
 Main drifts with the Akamai CLI official Docker image (non exhaustive):
-- Built on top of Debian slim instead of Alpine (solve all potential musl/glibc differences)
+- Built on top of Debian slim instead of Alpine (solves all potential musl/glibc differences)
 - Running as unprivileged user, with proper HOME folder & directory structure.
 - Additional tools (httpie/edgedrid, akcurl ...)
 - Lighter :)
@@ -83,7 +83,7 @@ alias akcli="/usr/local/bin/akamai-toolbox cli"
 
 ### Usage
 
-Simply deploy run the `akamai-toolbox` command :
+Simply run the `akamai-toolbox` command :
 ```
 Usage :
 -------
