@@ -1,4 +1,4 @@
-name: Releases
+me: Releases
 
 on:
   push:
@@ -16,6 +16,7 @@ jobs:
         run: |
           _TAG=$(echo "${{ github.ref }}" | sed "s|refs/tags/||g")
           sed -i "s|^TAG=\"latest\"|TAG=\"${_TAG}\"|" bin/akamai-toolbox
+          sha256sum bin/akamai-toolbox > akamai-toolbox.sha256
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -28,8 +29,8 @@ jobs:
             FIXME: improve release doc
           draft: false
           prerelease: false
-      - name: Upload Release Asset
-        id: upload-release-asset
+      - name: Upload release
+        id: upload-release
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -37,4 +38,14 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: bin/akamai-toolbox
           asset_name: akamai-toolbox
+          asset_content_type: text/plain
+      - name: Upload checksum
+        id: upload-checksum
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: akamai-toolbox.sha256
+          asset_name: akamai-toolbox.sha256
           asset_content_type: text/plain
