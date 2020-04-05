@@ -1,4 +1,4 @@
-name: Releases
+name: Release
 
 on:
   push:
@@ -11,12 +11,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
+      - name: Fetch tags/branches history
+        run: git fetch --prune --unshallow
       - name: Build wrapper
         run: |
           _TAG=$(echo "${{ github.ref }}" | sed "s|refs/tags/||g")
           sed -i "s|^TAG=\"latest\"|TAG=\"${_TAG}\"|" bin/akamai-toolbox
           sha256sum bin/akamai-toolbox > akamai-toolbox.sha256
+      - shell: bash
+        id: changelog
+        run: |
+          _TAG=$(echo "${{ github.ref }}" | sed "s|refs/tags/||g")
+          _PREVIOUS_TAG=$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))
+          _RELEASE_CHANGELOG="$(git log --pretty=format:"%h %s" ${_PREVIOUS_TAG}...${_TAG})"
+
+          # hack from https://github.community/t5/GitHub-Actions/set-output-Truncates-Multiline-Strings/td-p/37870
+          _RELEASE_CHANGELOG="${_RELEASE_CHANGELOG//'%'/'%25'}"
+          _RELEASE_CHANGELOG="${_RELEASE_CHANGELOG//$'\n'/'%0A'}"
+          _RELEASE_CHANGELOG="${_RELEASE_CHANGELOG//$'\r'/'%0D'}"
+
+          echo "::set-output name=RELEASE_CHANGELOG::$_RELEASE_CHANGELOG"
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -26,10 +41,11 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: |
-            FIXME: improve release doc
+            ### Changelog
+            ${{ steps.changelog.outputs.RELEASE_CHANGELOG }}
           draft: false
           prerelease: false
-      - name: Upload release
+      - name: Upload akamai-toolbox to release
         id: upload-release
         uses: actions/upload-release-asset@v1
         env:
@@ -39,7 +55,7 @@ jobs:
           asset_path: bin/akamai-toolbox
           asset_name: akamai-toolbox
           asset_content_type: text/plain
-      - name: Upload checksum
+      - name: Upload checksum to release
         id: upload-checksum
         uses: actions/upload-release-asset@v1
         env:
