@@ -68,7 +68,7 @@ Downloading the wrapper from the master branch is also definitely an option. Ple
 Example :
 ```
 # From a given release
-$ wget -qO /usr/local/bin/akamai-toolbox https://github.com/ducksify/akamai-toolbox/releases/download/20200404-rc1/akamai-toolbox
+$ RELEASE=20200406-1.0 wget -qO /usr/local/bin/akamai-toolbox https://github.com/ducksify/akamai-toolbox/releases/download/$RELEASE/akamai-toolbox
 
 # From master branch
 $ wget -qO /usr/local/bin/akamai-toolbox https://raw.githubusercontent.com/ducksify/akamai-toolbox/master/bin/akamai-toolbox
@@ -114,7 +114,7 @@ Valid commands :
 
 #### Using the Akamai CLI
 ```
-$ akamai-toolbox cli
+$ akcli
 Usage:
   akamai [global flags] command [command flags] [arguments...]
 
@@ -137,7 +137,7 @@ Installed Commands:
 
 #### Using HTTPie 
 ```
-$ akamai-toolbox http
+$ akhttp
 usage: http [--json] [--form] [--pretty {all,colors,format,none}]
             [--style STYLE] [--print WHAT] [--headers] [--body] [--verbose]
             [--all] [--history-print WHAT] [--stream] [--output FILE]
@@ -150,7 +150,7 @@ usage: http [--json] [--form] [--pretty {all,colors,format,none}]
 
 #### Using akcurl 
 ```
-$ akamai-toolbox akcurl https://ducksify.com/
+$ akcurl https://ducksify.com/
 HTTP/2 200
 
 accept-ranges: bytes
