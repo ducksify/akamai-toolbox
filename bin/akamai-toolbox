@@ -40,12 +40,10 @@ HELP_USAGE
 }
 
 function toolbox_exec() {
-  _args=$*
-
   if [[ $(docker ps | grep akamai-toolbox$ | wc -l) -eq 1 ]]; then
     docker exec -it \
-      akamai-toolbox ${_args}
-  elif docker start akamai-toolbox > /dev/null 2>&1 && sleep 3 && docker exec -it akamai-toolbox ${_args}; then
+      akamai-toolbox $@
+  elif docker start akamai-toolbox > /dev/null 2>&1 && sleep 3 && docker exec -it akamai-toolbox $@; then
     exit 0
   else
     docker create -it \
@@ -53,7 +51,7 @@ function toolbox_exec() {
       -v "${AKAMAI_TOOLBOX_WORKSPACE}:/home/toolbox/workspace" \
       --cap-drop=all \
       --name akamai-toolbox ${CLI_IMAGE_NAME} > /dev/null
-      akamai-toolbox "${_args}"
+      akamai-toolbox $@
   fi
 }
 
