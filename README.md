@@ -29,6 +29,7 @@
     + [Using the Akamai CLI](#using-the-akamai-cli)
     + [Using HTTPie](#using-httpie)
     + [Using akcurl](#using-akcurl)
+    + [Using Letsencrypt DNS-01](#using-letsencrypt)
 - [Customizing build](#customizing-build)
 
 ## Intro
@@ -101,15 +102,20 @@ alias akcli="/usr/local/bin/akamai-toolbox cli"
 
 Simply run the `akamai-toolbox` command :
 ```
-Usage :
--------
+Usage:
+------
 $ akamai-toolbox <cmd>
 
-Valid commands :
-----------------
-- cli : Akamai CLI
-- http : HTTPie with edgegrid plugin
-- akcurl : Debug online properties
+Valid commands:
+---------------
+- cli                 : Akamai CLI
+- http                : HTTPie with edgegrid plugin
+- akcurl              : Debug online properties
+- letsencrypt-auth    : Letsencrypt DNS-01 Challenge
+                        CERTBOT_DOMAIN - Env. variable DNS TXT record to set
+                        CERTBOT_VALIDATION - Env. variable DNS domain name
+- letsencrypt-cleanup : Letsencrypt DNS-01 Challenge cleanup
+                        CERTBOT_DOMAIN - Env. variable DNS TXT record to set
 ```
 
 #### Using the Akamai CLI
@@ -190,6 +196,16 @@ Upload speed 0.0 KB
                                                                                  total:226ms
 ```
 
+#### Using letsencrypt
+```
+$ export TOOLBOX_SCRIPT="/usr/local/bin/akamai-toolbox"
+$ sudo certbot certonly \
+               --register-unsafely-without-email \
+               --manual --preferred-challenges=dns \
+               --manual-auth-hook "${TOOLBOX_SCRIPT} letsencrypt-auth" \
+               --manual-cleanup-hook "${TOOLBOX_SCRIPT} letsencrypt-cleanup"\
+               -d evilduck.network
+```
 
 ## Customizing build
 
