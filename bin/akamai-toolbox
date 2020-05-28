@@ -5,35 +5,79 @@
 TAG="latest"
 CLI_IMAGE_NAME="ducksify/akamai-toolbox:${TAG}"
 AKAMAI_TOOLBOX_WORKSPACE="${AKAMAI_TOOLBOX_WORKSPACE:-${HOME}/akamai-toolbox-workspace}"
+SLEEP=120
+
+_toolbox_args=""
 
 [ -d "${AKAMAI_TOOLBOX_WORKSPACE}" ] || {
   mkdir -p "${AKAMAI_TOOLBOX_WORKSPACE}"
 }
 
-if [[ ! "$1" =~ ^(cli|http|akcurl)$ ]];
-then
-  echo -e "Usage :"
-  echo -e "-------"
-  echo -e "$ akamai-toolbox <cmd>\n"
-  echo -e "Valid commands :"
-  echo -e "----------------"
-  echo -e "- cli : Akamai CLI"
-  echo -e "- http : HTTPie with edgegrid plugin"
-  echo -e "- akcurl : Debug online properties"
-  echo -e "\n"
+function show_error() {
+    MSG="${1}"
+    echo -e "\\n    Error!    ${MSG}\\n"
+    show_usage
+}
+function show_usage() {
+    cat <<HELP_USAGE
+    Usage:
+    ------
+    $ ${0##*/} <cmd>
+
+    Valid commands:
+    ---------------
+    - cli                 : Akamai CLI
+    - http                : HTTPie with edgegrid plugin
+    - akcurl              : Debug online properties
+    - letsencrypt-auth    : Letsencrypt DNS-01 Challenge
+                            CERTBOT_DOMAIN - Env. variable DNS TXT record to set
+                            CERTBOT_VALIDATION - Env. variable DNS domain name
+    - letsencrypt-cleanup : Letsencrypt DNS-01 Challenge cleanup
+                            CERTBOT_DOMAIN - Env. variable DNS TXT record to set
+
+HELP_USAGE
   exit 123
-else
-  if [[ `docker ps | grep akamai-toolbox$ | wc -l` -eq 1 ]]; then
+}
+
+function toolbox_exec() {
+  if [[ $(docker ps | grep akamai-toolbox$ | wc -l) -eq 1 ]]; then
     docker exec -it \
       akamai-toolbox $@
   elif docker start akamai-toolbox > /dev/null 2>&1 && sleep 3 && docker exec -it akamai-toolbox $@; then
     exit 0
   else
     docker create -it \
-      -v $HOME/.edgerc:/home/toolbox/.edgerc \
-      -v ${AKAMAI_TOOLBOX_WORKSPACE}:/home/toolbox/workspace \
+      -v "${HOME}/.edgerc:/home/toolbox/.edgerc" \
+      -v "${AKAMAI_TOOLBOX_WORKSPACE}:/home/toolbox/workspace" \
       --cap-drop=all \
       --name akamai-toolbox ${CLI_IMAGE_NAME} > /dev/null
       akamai-toolbox $@
   fi
-fi
+}
+
+case "$1" in
+  cli|http|akcurl)
+    _toolbox_args="$@"
+    toolbox_exec "${_toolbox_args}"
+  ;;
+
+  letsencrypt-auth)
+    [[ -z $CERTBOT_DOMAIN ]] && { show_error "CERTBOT_DOMAIN not provided, exiting"; }
+    [[ -z $CERTBOT_VALIDATION ]] && { show_error "CERTBOT_VALIDATION not provided, exiting"; }
+    echo "Running with domain: ${CERTBOT_DOMAIN} / validation : ${CERTBOT_VALIDATION}"
+    _toolbox_args='cli dns add-record TXT '''${CERTBOT_DOMAIN}''' --name=_acme-challenge --target='''${CERTBOT_VALIDATION}''' --ttl 120'
+    toolbox_exec "${_toolbox_args}"
+    echo -e "\\nSleeping ${SLEEP}s ...\\n"
+    sleep $SLEEP 
+  ;;
+
+  letsencrypt-cleanup)
+    [[ -z $CERTBOT_DOMAIN ]] && { show_error "CERTBOT_DOMAIN not provided, exiting"; }
+    _toolbox_args='cli dns rm-record TXT '''${CERTBOT_DOMAIN}''' --name=_acme-challenge'
+    toolbox_exec "${_toolbox_args}"
+  ;;
+
+  *)
+    show_usage
+  ;;
+esac
