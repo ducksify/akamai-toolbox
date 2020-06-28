@@ -19,7 +19,7 @@ ENV TOOLBOX_USER="toolbox" TOOLBOX_USER_HOME="/home/toolbox" AKAMAI_CLI_HOME="/h
 ADD ${AKAMAI_CLI_PACKAGES} /tmp/packages.json
 COPY bin/cmd/akcurl /usr/local/bin/akcurl
 
-RUN useradd -u 9001 -g 9001 -m -d ${TOOLBOX_USER_HOME} -s /bin/sh ${TOOLBOX_USER} \
+RUN useradd -u 9001 -m -d ${TOOLBOX_USER_HOME} -s /bin/sh ${TOOLBOX_USER} \
     && mkdir -p ${AKAMAI_CLI_HOME}/.akamai-cli ${TOOLBOX_USER_HOME}/workspace \
     && chown -R ${TOOLBOX_USER}:${TOOLBOX_USER} ${AKAMAI_CLI_HOME}/.akamai-cli ${TOOLBOX_USER_HOME}/workspace /usr/local/bin/akcurl \
     && echo "global = true" > ${TOOLBOX_USER_HOME}/.npmrc \
