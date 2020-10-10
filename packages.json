@@ -15,6 +15,7 @@
     "property-manager",
     "purge",
     "visitor-prioritization",
-    "https://github.com/apiheat/akamai-cli-cpcodes"
+    "https://github.com/apiheat/akamai-cli-cpcodes",
+    "onboard"
   ]
 }
