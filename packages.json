@@ -5,6 +5,7 @@
     "appsec",
     "auth",
     "cps",
+    "diagnostics",
     "dns",
     "eaa",
     "edgeworkers",
