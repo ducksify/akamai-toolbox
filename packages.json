@@ -17,6 +17,7 @@
     "purge",
     "visitor-prioritization",
     "https://github.com/apiheat/akamai-cli-cpcodes",
-    "onboard"
+    "onboard",
+    "https://github.com/apiheat/akamai-cli-netlist"
   ]
 }
