@@ -18,6 +18,7 @@
     "visitor-prioritization",
     "https://github.com/apiheat/akamai-cli-cpcodes",
     "onboard",
-    "https://github.com/apiheat/akamai-cli-netlist"
+    "https://github.com/apiheat/akamai-cli-netlist",
+    "sandbox"
   ]
 }
