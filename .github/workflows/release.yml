@@ -19,6 +19,7 @@ jobs:
           _TAG=$(echo "${{ github.ref }}" | sed "s|refs/tags/||g")
           sed -i "s|^TAG=\"latest\"|TAG=\"${_TAG}\"|" bin/akamai-toolbox
           cd bin && sha256sum akamai-toolbox > ../akamai-toolbox.sha256
+          sed -i 's|bin/akamai-toolbox|akamai-toolbox|' ../akamai-toolbox.sha256
       - shell: bash
         id: changelog
         run: |
