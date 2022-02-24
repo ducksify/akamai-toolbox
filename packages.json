@@ -3,21 +3,14 @@
   "packages": [
     "adaptive-acceleration",
     "appsec",
-    "auth",
     "cps",
     "diagnostics",
     "dns",
-    "eaa",
-    "edgeworkers",
     "firewall",
     "image-manager",
-    "netstorage",
-    "property",
     "property-manager",
     "purge",
-    "visitor-prioritization",
     "https://github.com/apiheat/akamai-cli-cpcodes",
-    "onboard",
     "https://github.com/apiheat/akamai-cli-netlist",
     "sandbox"
   ]
