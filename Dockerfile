@@ -1,7 +1,7 @@
-FROM debian:10-slim
+FROM debian:11-slim
 ARG BUILD_DATE
 ARG VCS_REF
-ARG AKAMAI_CLI_VERSION="1.1.5"
+ARG AKAMAI_CLI_VERSION="1.3.1"
 ARG AKAMAI_CLI_PACKAGES="./packages.json"
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
@@ -22,12 +22,9 @@ COPY bin/cmd/akcurl /usr/local/bin/akcurl
 RUN useradd -u 9001 -m -d ${TOOLBOX_USER_HOME} -s /bin/sh ${TOOLBOX_USER} \
     && mkdir -p ${AKAMAI_CLI_HOME}/.akamai-cli ${TOOLBOX_USER_HOME}/workspace \
     && chown -R ${TOOLBOX_USER}:${TOOLBOX_USER} ${AKAMAI_CLI_HOME}/.akamai-cli ${TOOLBOX_USER_HOME}/workspace /usr/local/bin/akcurl \
-    && echo "global = true" > ${TOOLBOX_USER_HOME}/.npmrc \
-    && echo "prefix = /home/toolbox/.npm-packages" >> ${TOOLBOX_USER_HOME}/.npmrc \
     && apt-get update \
     && apt-get -y dist-upgrade \
-    && apt-get install --no-install-recommends -y git python2 python3 python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip openssl nodejs npm golang jq curl httpie bc \
-    && pip2 install --no-cache-dir --upgrade pip \
+    && apt-get install --no-install-recommends -y git python2 python3 python-dev python3-dev python-setuptools python3-setuptools python3-pip openssl nodejs npm golang jq curl httpie bc \
     && pip3 install --no-cache-dir --upgrade pip \
     && pip3 install httpie-edgegrid \
     && curl -sL -o /usr/local/bin/cli $(curl -s "https://api.github.com/repos/akamai/cli/releases/tags/$AKAMAI_CLI_VERSION" | jq -r '.assets[].browser_download_url' | grep linuxamd64 | grep -v sig) \
