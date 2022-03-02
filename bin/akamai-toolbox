@@ -3,7 +3,7 @@
 # Akamai Toolbox Wrapper
 #
 TAG="latest"
-CLI_IMAGE_NAME="ducksify/akamai-toolbox:${TAG}"
+CLI_IMAGE_NAME="ghcr.io/ducksify/akamai-toolbox:${TAG}"
 AKAMAI_TOOLBOX_WORKSPACE="${AKAMAI_TOOLBOX_WORKSPACE:-${HOME}/akamai-toolbox-workspace}"
 SLEEP=120
 

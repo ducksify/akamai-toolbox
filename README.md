@@ -85,7 +85,7 @@ You can override it by setting up an environment variable called `AKAMAI_TOOLBOX
 ### Pulling image
 If you just want to pull the image :
 ```
-$ docker pull ducksify/akamai-toolbox:<tagname>
+$ docker pull ghcr.io/ducksify/akamai-toolbox:<tagname>
 ```
 
 ### Handy shell aliases
