@@ -42,8 +42,8 @@ HELP_USAGE
 function toolbox_exec() {
   if [[ $(docker ps | grep akamai-toolbox$ | wc -l) -eq 1 ]]; then
     docker exec -it \
-      akamai-toolbox $@
-  elif docker start akamai-toolbox > /dev/null 2>&1 && sleep 3 && docker exec -it akamai-toolbox $@; then
+      akamai-toolbox "$@"
+  elif docker start akamai-toolbox > /dev/null 2>&1 && sleep 3 && docker exec -it akamai-toolbox "$@"; then
     exit 0
   else
     docker create -it \
@@ -51,13 +51,13 @@ function toolbox_exec() {
       -v "${AKAMAI_TOOLBOX_WORKSPACE}:/home/toolbox/workspace" \
       --cap-drop=all \
       --name akamai-toolbox ${CLI_IMAGE_NAME} > /dev/null
-      akamai-toolbox $@
+      akamai-toolbox "$@"
   fi
 }
 
 case "$1" in
   cli|http|akcurl)
-    _toolbox_args="$@"
+    _toolbox_args="$*"
     toolbox_exec "${_toolbox_args}"
   ;;
 
