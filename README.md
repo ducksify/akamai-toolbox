@@ -8,7 +8,6 @@
     <img alt="GitHub forks" src="https://badgen.net/github/forks/ducksify/akamai-toolbox?cache=300&icon=github"/>
     <img alt="GitHub stars" src="https://badgen.net/github/stars/ducksify/akamai-toolbox?cache=300&icon=github"/>
     <img alt="GitHub releases" src="https://badgen.net/github/releases/ducksify/akamai-toolbox?cache=300&color=black&icon=github"/>
-    <img alt="Docker pulls" src="https://badgen.net/docker/pulls/ducksify/akamai-toolbox?icon=docker&cache=300&color=cyan"/>
   </p>
 </p>
 
