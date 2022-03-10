@@ -41,7 +41,7 @@ HELP_USAGE
 
 function toolbox_exec() {
   if [[ $(docker ps | grep akamai-toolbox$ | wc -l) -eq 1 ]]; then
-    docker exec -it \
+    docker exec -t \
       akamai-toolbox $@
   elif docker start akamai-toolbox > /dev/null 2>&1 && sleep 3 && docker exec -it akamai-toolbox $@; then
     exit 0
