@@ -10,4 +10,6 @@ jobs:
         uses: ludeeus/action-shellcheck@master
         with:
           scandir: './bin'
-          ignore_names: akcurl
+          ignore_names:
+            - akcurl
+            - akamai-toolbox
