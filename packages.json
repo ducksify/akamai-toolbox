@@ -6,6 +6,7 @@
     "cps",
     "diagnostics",
     "dns",
+    "eaa",
     "firewall",
     "image-manager",
     "property-manager",
