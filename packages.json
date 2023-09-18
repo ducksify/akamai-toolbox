@@ -7,14 +7,13 @@
     "diagnostics",
     "dns",
     "eaa",
-    "edgeworkers",
     "firewall",
     "image-manager",
-    "pipeline",
     "property-manager",
     "purge",
     "https://github.com/apiheat/akamai-cli-cpcodes",
     "https://github.com/apiheat/akamai-cli-netlist",
-    "sandbox"
+    "ericdebeij/akamai-review",
+    "cli-onboard"
   ]
 }
