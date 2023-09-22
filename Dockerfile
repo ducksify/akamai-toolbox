@@ -1,7 +1,7 @@
 FROM debian:11-slim
 ARG BUILD_DATE
 ARG VCS_REF
-ARG AKAMAI_CLI_VERSION="1.3.1"
+ARG AKAMAI_CLI_VERSION="1.5.5"
 ARG AKAMAI_CLI_PACKAGES="./packages.json"
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
@@ -47,9 +47,6 @@ RUN useradd -u 9001 -m -d ${TOOLBOX_USER_HOME} -s /bin/sh ${TOOLBOX_USER} \
     && echo "cache-path            = ${AKAMAI_CLI_HOME}/.akamai-cli/cache" >> ${AKAMAI_CLI_HOME}/.akamai-cli/config \
     && echo "config-version        = 1.1"                                  >> ${AKAMAI_CLI_HOME}/.akamai-cli/config \
     && echo "enable-cli-statistics = false"                                >> ${AKAMAI_CLI_HOME}/.akamai-cli/config \
-    && echo "last-ping             = $(date --utc +%FT%TZ)"                >> ${AKAMAI_CLI_HOME}/.akamai-cli/config \
-    && echo "client-id             ="                                      >> ${AKAMAI_CLI_HOME}/.akamai-cli/config \
-    && echo "install-in-path       ="                                      >> ${AKAMAI_CLI_HOME}/.akamai-cli/config \
     && echo "last-upgrade-check    = ignore"                               >> ${AKAMAI_CLI_HOME}/.akamai-cli/config
 
 USER ${TOOLBOX_USER}
