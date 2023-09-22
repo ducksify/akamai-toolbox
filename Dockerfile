@@ -33,7 +33,7 @@ RUN useradd -u 9001 -m -d ${TOOLBOX_USER_HOME} -s /bin/sh ${TOOLBOX_USER} \
     && apt-get install --no-install-recommends -y nodejs golang/bullseye-backports golang-doc/bullseye-backports golang-go/bullseye-backports golang-src/bullseye-backports \
     && pip3 install --no-cache-dir --upgrade pip \
     && pip3 install httpie-edgegrid \
-    && curl -sL -o /usr/local/bin/cli $(curl -s "https://api.github.com/repos/akamai/cli/releases/tags/$AKAMAI_CLI_VERSION" | jq -r '.assets[].browser_download_url' | grep linuxamd64 | grep -v sig) \
+    && curl -sL -o /usr/local/bin/cli https://github.com/akamai/cli/releases/download/v${AKAMAI_CLI_VERSION}/akamai-v${AKAMAI_CLI_VERSION}-linuxamd64 \
     && chmod +x /usr/local/bin/cli \
     && ln -s /usr/local/bin/cli /usr/local/bin/akamai \
     && chmod +x /usr/local/bin/akcurl \
