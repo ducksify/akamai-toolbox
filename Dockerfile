@@ -37,7 +37,7 @@ RUN useradd -u 9001 -m -d ${TOOLBOX_USER_HOME} -s /bin/sh ${TOOLBOX_USER} \
     && chmod +x /usr/local/bin/cli \
     && ln -s /usr/local/bin/cli /usr/local/bin/akamai \
     && chmod +x /usr/local/bin/akcurl \
-    && jq -r '.packages[]' < /tmp/packages.json | xargs -I '{}' /bin/su -c "export AKAMAI_CLI_HOME=${AKAMAI_CLI_HOME} ; echo '=> Installing: {}' ; /usr/local/bin/cli install --force {} ; echo OK" - ${TOOLBOX_USER} \
+    && jq -r '.packages[]' < /tmp/packages.json | xargs -I '{}' /bin/su -c "export AKAMAI_CLI_HOME=${AKAMAI_CLI_HOME} ; echo '** Installing: {} **' ; /usr/local/bin/cli install --force {} ; echo OK" - ${TOOLBOX_USER} \
     && su -c "npm cache clean --force" - ${TOOLBOX_USER} \
     && apt-get remove -y --purge python3-dev python3-setuptools python3-pip python3-venv npm "golang*" git gpg \
     && apt-get clean \
