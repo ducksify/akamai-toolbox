@@ -13,7 +13,6 @@
     "purge",
     "https://github.com/apiheat/akamai-cli-cpcodes",
     "https://github.com/apiheat/akamai-cli-netlist",
-    "ericdebeij/akamai-review",
-    "cli-onboard"
+    "ericdebeij/akamai-review"
   ]
 }

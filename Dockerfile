@@ -26,7 +26,7 @@ RUN useradd -u 9001 -m -d ${TOOLBOX_USER_HOME} -s /bin/sh ${TOOLBOX_USER} \
     && echo "deb-src http://deb.debian.org/debian bullseye-backports main contrib non-free" | tee -a /etc/apt/sources.list.d/bullseye-backports.list \
     && apt-get update \
     && apt-get -y dist-upgrade \
-    && apt-get install --no-install-recommends -y git python2 python3 python-dev python3-dev python-setuptools python3-setuptools python3-pip openssl jq curl httpie bc gpg \
+    && apt-get install --no-install-recommends -y git python3 python3-dev python3-setuptools python3-pip python3-venv openssl jq curl httpie bc gpg \
     && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
     && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list \
     && apt-get update \
@@ -37,9 +37,9 @@ RUN useradd -u 9001 -m -d ${TOOLBOX_USER_HOME} -s /bin/sh ${TOOLBOX_USER} \
     && chmod +x /usr/local/bin/cli \
     && ln -s /usr/local/bin/cli /usr/local/bin/akamai \
     && chmod +x /usr/local/bin/akcurl \
-    && jq -r '.packages[]' < /tmp/packages.json | xargs -I '{}' /bin/su -c "export AKAMAI_CLI_HOME=${AKAMAI_CLI_HOME} ; /usr/local/bin/cli install --force {} ; echo OK" - ${TOOLBOX_USER} \
+    && jq -r '.packages[]' < /tmp/packages.json | xargs -I '{}' /bin/su -c "export AKAMAI_CLI_HOME=${AKAMAI_CLI_HOME} ; echo '=> Installing: {}' ; /usr/local/bin/cli install --force {} ; echo OK" - ${TOOLBOX_USER} \
     && su -c "npm cache clean --force" - ${TOOLBOX_USER} \
-    && apt-get remove -y --purge python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip npm "golang*" git gpg \
+    && apt-get remove -y --purge python3-dev python3-setuptools python3-pip python3-venv npm "golang*" git gpg \
     && apt-get clean \
     && find /home/toolbox/.akamai-cli/src/ -type d -name ".git" | xargs -I '{}' rm -rf '{}' \
     && rm -f /tmp/packages.json \
